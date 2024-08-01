@@ -10,11 +10,11 @@ my_dict = {
 }
 
 # - Выведите на экран словарь my_dict.
-print(my_dict)
+print(f"Dictionary: {my_dict}")
 
 # - Выведите на экран одно значение по существующему ключу, одно по отсутствующему из словаря my_dict без ошибки.
-print(my_dict.get('Python', 'No such entry'))
-print(my_dict.get('C#', 'No such entry'))
+print(f"Python creation year: {my_dict.get('Python', 'No such entry')}")
+print(f"C# creation year: {my_dict.get('C#', 'No such entry')}")
 
 # - Добавьте ещё две произвольные пары того же формата в словарь my_dict.
 my_dict.update(
@@ -36,7 +36,7 @@ print(f"Programming languages: {my_dict}")
 my_set = {1, 1, 2, 2, 'apple', 'apple'}
 
 # - Выведите на экран множество my_set (должны отобразиться только уникальные значения).
-print(my_set)
+print(f"Set: {my_set}")
 
 # - Добавьте 2 произвольных элемента в множество my_set, которых ещё нет.
 my_set.add(3)
@@ -46,4 +46,4 @@ my_set.add('orange')
 my_set.discard(3)
 
 # - Выведите на экран измененное множество my_set.
-print(my_set)
+print(f"Modified set: {my_set}")
