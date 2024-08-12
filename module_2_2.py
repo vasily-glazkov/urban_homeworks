@@ -9,9 +9,9 @@
 Если равных чисел среди 3-х вообще нет, то вывести 0
 """
 
-first_num = input('Введите первое число: ')
-second_num = input('Введите второе число: ')
-third_num = input('Введите третье число: ')
+first_num = int(input('Введите первое число: '))
+second_num = int(input('Введите второе число: '))
+third_num = int(input('Введите третье число: '))
 
 if first_num == second_num == third_num:
     print(3)
