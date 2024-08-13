@@ -24,7 +24,7 @@
 # Здесь <sender> и <recipient> - значения хранящиеся в этих переменных.
 # За один вызов функции выводится только одно и перечисленных уведомлений! Проверки перечислены по мере выполнения.
 
-
+# Функция для проверки валидности адресов отправителя и получателя
 def check_validity(recipient, sender):
     if ("@" not in recipient or "@" not in sender) or \
             (recipient.split('.')[-1] not in ['com', 'ru', 'net'] or
@@ -33,6 +33,7 @@ def check_validity(recipient, sender):
     return True
 
 
+# Основная функция отправки писем
 def send_email(message, recipient, *, sender='university.help@gmail.com'):
     if not check_validity(recipient, sender):
         print(f'Невозможно отправить письмо с адреса {sender} на адрес {recipient}')
