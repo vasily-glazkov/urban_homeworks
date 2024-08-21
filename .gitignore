@@ -6,3 +6,7 @@
 /.venv/
 
 .vscode
+
+.DS_Store
+
+calculator/output
