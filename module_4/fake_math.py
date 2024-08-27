@@ -1,3 +1,5 @@
+from dis import dis
+
 def divide(first, second):
     """
     Функция деления двух чисел
@@ -8,3 +10,5 @@ def divide(first, second):
     if second == 0:
         return 'Ошибка'
     return first / second
+
+dis(divide)
