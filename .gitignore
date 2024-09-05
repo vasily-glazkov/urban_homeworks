@@ -10,3 +10,5 @@
 .DS_Store
 
 calculator/output
+
+__pycache__
