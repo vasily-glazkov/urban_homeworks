@@ -36,8 +36,7 @@ class House:
                 print(i, end=' ')
         print('\n')
 
-
 high_tower = House('Isengard', 50)
 
-high_tower.go_to(-2)  # 1 2 3 4 5 6 7 8 9 10
+high_tower.go_to(10)  # 1 2 3 4 5 6 7 8 9 10
 print(high_tower.name)  # Isengard
