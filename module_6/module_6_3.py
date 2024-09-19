@@ -29,6 +29,9 @@ voice - который печатает значение унаследован�
 
 
 class Horse():
+    """
+    Класс Horse описывает лошадь
+    """
     def __init__(self):
         self.x_distance = 0
         self.sound = 'Frrr'
@@ -38,6 +41,9 @@ class Horse():
 
 
 class Eagle():
+    """
+    Класс Eagle описывает орла
+    """
     def __init__(self):
         super().__init__()
         self.y_distance = 0
@@ -48,6 +54,9 @@ class Eagle():
 
 
 class Pegasus(Eagle, Horse):
+    """
+    Класс Pegasus описывает пегаса и наследует классы Horse и Eagle
+    """
     def __init__(self):
         super().__init__()
 
