@@ -1,11 +1,18 @@
 import math
 
+
 # Родительский класс Figure
 class Figure:
     sides_count = 0
 
-    def __init__(self, color, *sides):
-        self.__color = color
+    def __init__(self, color: list, *sides):
+        self.__color = list(color)
+        # Проверка корректности цвета при инициализации
+        if self.__is_valid_color(*color):
+            self.__color = color
+        else:
+            self.__color = [0, 0, 0]  # Стандартный цвет - черный
+
         self.filled = False
         if not self.__is_valid_sides(*sides):
             self.__sides = [1] * self.sides_count
