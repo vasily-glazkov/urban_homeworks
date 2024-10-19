@@ -72,7 +72,7 @@ write_words(200, 'example3.txt')
 write_words(100, 'example4.txt')
 time_end = datetime.now()
 completion_time = time_end - time_start
-print(completion_time) # 0:00:35.206513
+print(completion_time)  # 0:00:35.206513
 
 thr_1 = Thread(target=write_words, args=(10, 'example1.txt'))
 thr_2 = Thread(target=write_words, args=(30, 'example2.txt'))
@@ -92,4 +92,4 @@ thr_4.join()
 time_end = datetime.now()
 completion_time = time_end - time_start
 
-print(completion_time) # 0:00:20.713111
+print(completion_time)  # 0:00:20.713111
