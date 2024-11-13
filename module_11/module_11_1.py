@@ -67,4 +67,4 @@ def display_weather_data(city: str):
 
 
 if __name__ == '__main__':
-    display_weather_data('Murmansk')
+    display_weather_data('Kaliningrad')
