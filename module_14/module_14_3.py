@@ -29,12 +29,21 @@ from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKe
     ReplyKeyboardRemove, FSInputFile, CallbackQuery
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.state import State, StatesGroup
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 bot = Bot(token=os.getenv('BOT_TOKEN'))
 dp = Dispatcher(storage=MemoryStorage())
+
+data = [
+    {"name": "СуперВитамин", "description": "Витаминный комплекс для спортсменов"},
+    {"name": "МегаВит", "description": "Витамины на каждый день"},
+    {"name": "Супер Минералы", "description": "Минеральный комплекс для всех"},
+    {"name": "Мега женьшень", "description": "Витаминно-минеральный комплекс, усиленный экстрактом женьшеня"},
+]
 
 
 async def run_bot():
@@ -59,18 +68,13 @@ inline_kb = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Формулы расчёта', callback_data='formulas')]
 ])
 
-buy_inline_kb = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [
-            InlineKeyboardButton(text="Product1", callback_data="product_buying"),
-            InlineKeyboardButton(text="Product2", callback_data="product_buying")
-        ],
-        [
-            InlineKeyboardButton(text="Product3", callback_data="product_buying"),
-            InlineKeyboardButton(text="Product4", callback_data="product_buying")
-        ]
-    ]
-)
+
+#  Используем InlineKeyboardBuilder для динамической генерации кнопок
+async def products_btn():
+    keyboard = InlineKeyboardBuilder()
+    for product in data:
+        keyboard.add(InlineKeyboardButton(text=product['name'], callback_data="product_buying"))
+    return keyboard.adjust(2).as_markup()
 
 
 class UserState(StatesGroup):
@@ -103,12 +107,13 @@ async def main_menu(message: Message):
 # В конце выведите ранее созданное Inline меню с надписью "Выберите продукт для покупки:".
 @dp.message(F.text == "Купить")
 async def get_buying_list(message: Message):
-    for i in range(1, 5):
-        await message.answer(f"Название: Product{i} | Описание: описание {i} | Цена: {i * 100}")
+    for i, product in enumerate(data, start=1):
+        name = product["name"]
+        description = product["description"]
+        await message.answer(f"Название: {name} | Описание: {description} | Цена: {i * 100}")
         img = FSInputFile(f'../files/product{i}.png')
         await message.answer_photo(img)
-    await message.answer("Выберите продукт для покупки:", reply_markup=buy_inline_kb)
-
+    await message.answer("Выберите продукт для покупки:", reply_markup=await products_btn())
 
 
 # Callback хэндлер, который реагирует на текст "product_buying" и оборачивает функцию send_confirm_message(call).
