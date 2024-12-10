@@ -44,6 +44,8 @@ load_dotenv()
 bot = Bot(token=os.getenv('BOT_TOKEN'))
 dp = Dispatcher(storage=MemoryStorage())
 
+initiate_db()  # инициализируем БД
+
 data = [
     {"name": "СуперВитамин", "description": "Витаминный комплекс для спортсменов", "price": 100},
     {"name": "МегаВит", "description": "Витамины на каждый день", "price": 200},
