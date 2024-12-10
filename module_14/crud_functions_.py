@@ -1,13 +1,5 @@
 """
-=== Экспериментальный файл ===
-Создайте файл crud_functions.py и напишите там следующие функции:
-initiate_db, которая создаёт таблицу Products, если она ещё не создана при помощи SQL запроса.
-Эта таблица должна содержать следующие поля:
-id - целое число, первичный ключ
-title(название продукта) - текст (не пустой)
-description(описание) - текст
-price(цена) - целое число (не пустой)
-get_all_products, которая возвращает все записи из таблицы Products, полученные при помощи SQL запроса.
+Примитивная ORM
 """
 import sqlite3
 
@@ -29,7 +21,36 @@ def initiate_db():
             img_path TEXT
         );
     """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS Users(
+            id INTEGER PRIMARY KEY,
+            username TEXT NOT NULL,
+            email TEXT NOT NULL,
+            age INTEGER NOT NULL,
+            balance INTEGER NOT NULL
+        );
+    """)
     connection.commit()
+
+
+def add_user(username, email, age, balance=1000):
+    check_user = cursor.execute("SELECT * FROM Users WHERE username = ?", (username,))
+    if check_user.fetchone() is None:
+        cursor.execute(
+            """
+                    INSERT INTO Users (username, email, age, balance) VALUES (?, ?, ?, ?)
+                """, (username, email, age, balance))
+    else:
+        print(f"Пользователь с таким именем {username} уже зарегистрирован")
+    connection.commit()
+
+
+def is_included(username):
+    check_user = cursor.execute("SELECT * FROM Users WHERE username = ?", (username,))
+    connection.commit()
+    if check_user.fetchone():
+        return True
+    return False
 
 
 def get_all_products():
@@ -42,6 +63,7 @@ def get_all_products():
         {"id": product[0], "title": product[1], "description": product[2], "price": product[3], "img_path": product[4]}
         for product in all_products
     ]
+    connection.commit()
     return products_list
 
 
